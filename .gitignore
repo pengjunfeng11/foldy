@@ -1,0 +1,11 @@
+dist/
+.DS_Store
+.build/
+__pycache__/
+*.py[cod]
+.env
+.env.*
+!.env.example
+*.p12
+*.pfx
+*.key

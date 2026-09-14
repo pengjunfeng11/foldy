@@ -1,0 +1,21 @@
+#!/bin/sh
+set -eu
+# Stop the old daemon before replacing bytes, then finish any persisted restoration.
+if /bin/launchctl print system/app.local.foldy.guardian >/dev/null 2>&1; then
+    /bin/launchctl bootout system/app.local.foldy.guardian
+fi
+if [ -e /Library/PrivilegedHelperTools/app.local.foldy.guardian ]; then
+    # Never execute a replaced user-owned or writable helper with installer privileges.
+    /usr/bin/codesign --verify --strict /Library/PrivilegedHelperTools/app.local.foldy.guardian
+    [ "$(/usr/bin/stat -f '%u:%Lp' /Library/PrivilegedHelperTools/app.local.foldy.guardian)" = "0:755" ]
+    [ ! -L /Library/PrivilegedHelperTools/app.local.foldy.guardian ]
+    # launchctl can return before the old process finishes its SIGTERM restoration.
+    attempt=0
+    until /Library/PrivilegedHelperTools/app.local.foldy.guardian --recover; do
+        attempt=$((attempt + 1))
+        [ "$attempt" -lt 20 ] || exit 1
+        /bin/sleep 0.25
+    done
+fi
+# Registration and account binding happen only after the app requests authorization.
+exit 0
