@@ -4,6 +4,14 @@ Foldy 是一个 macOS 菜单栏应用：读取 MacBook 的屏幕开合角度，�
 
 使用 Swift、AppKit、SwiftUI、ScreenCaptureKit 和 Metal 实现。参考 [Bendy](https://trybendy.app/) 与 [iphone-duo](https://github.com/chuspeeism/iphone-duo)，非官方版本。
 
+## 下载与安装
+
+**[下载 Foldy 0.4.7 DMG（Apple Silicon）](https://github.com/pengjunfeng11/foldy/releases/download/v0.4.7/Foldy-0.4.7-macOS-arm64.dmg)** · [发行说明与 SHA-256 校验文件](https://github.com/pengjunfeng11/foldy/releases/tag/v0.4.7)
+
+需要 macOS 14 或更新版本及 Apple Silicon MacBook。下载后打开 DMG，将 Foldy 拖到「Applications」，再从「应用程序」打开；使用安装包无需安装 Xcode 或自行编译。真实开合效果取决于机型是否提供铰链角度传感器。
+
+这是预览版本，采用 ad-hoc 签名，尚未经过 Apple 公证。若 macOS 拦截打开，请先确认下载来源，再按 [Apple 的应用打开说明](https://support.apple.com/en-lamr/102445) 在「系统设置 → 隐私与安全性」为此应用选择「仍要打开」。首次使用桌面效果需要录屏许可；飞书通知和任务守护为可选功能，需各自完成账号连接或管理员授权。
+
 ## 环境与构建
 
 - Apple Silicon、macOS 14 或更新版本。
